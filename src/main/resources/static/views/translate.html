@@ -1,0 +1,98 @@
+<h1>Translate</h1>
+
+<table class="table table-borderless">
+	<tr>
+		<td>Raw METAR</td>
+		<td>{{metar.message}}</td>
+	</tr>
+	<tr>
+		<td>Issued at</td>
+		<td>{{metar.time}}</td>
+	</tr>
+	<tr>
+		<td>ICAO</td>
+		<td>{{metar.airport.icao}}</td>
+	</tr>
+	<tr>
+		<td>City</td>
+		<td>{{metar.airport.city}}</td>
+	</tr>
+	<tr>
+		<td>State</td>
+		<td>{{metar.airport.country.name}}</td>
+	</tr>
+	<tr>
+		<td>Name</td>
+		<td>{{metar.airport.name}}</td>
+	</tr>
+	<tr>
+		<td>Elevation</td>
+		<td>{{metar.airport.altitude}}</td>
+	</tr>
+	<tr>
+		<td>Latitude</td>
+		<td>{{metar.airport.latitude}}</td>
+	</tr>
+	<tr>
+		<td>Longitude</td>
+		<td>{{metar.airport.longitude}}</td>
+	</tr>
+</table>
+<hr>
+<table class="table table-borderless">
+	<tr>
+		<td>CAVOK</td>
+		<td>{{metar.cavok}}</td>
+	</tr>
+	<tr>
+		<td>NOSIG</td>
+		<td>{{metar.nosig}}</td>
+	</tr>
+	<tr>
+		<td>Wind</td>
+		<td>
+			<table>
+				<tr ng-repeat="wind in winds">
+					<td>{{wind}}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+		<tr>
+		<td>Weather</td>
+		<td>
+			<table>
+				<tr ng-repeat ="weather in weathers">
+					<td>{{weather}}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>Clouds</td>
+		<td>
+			<table>
+				<tr ng-repeat="cloud in metar.clouds">
+					<td>{{cloud.height}}</td>
+					<td>{{cloud.quantity}}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>Visibility</td>
+		<td>{{metar.visibility.mainVisibility}}</td>
+	</tr>
+	<tr>
+		<td>Temperature</td>
+		<td>{{metar.temperature}}</td>
+	</tr>
+	<tr>
+		<td>Pressure </td>
+		<td>{{metar.altimeter}} hPa</td>
+	</tr>
+	<tr>
+		<td>Humidity</td>
+		<td>{{humidity}} %</td>
+	</tr>
+</table>

@@ -1,0 +1,41 @@
+<h1>Airports</h1>
+
+<form role="form" class="col-sm-6 col-lg-4">
+	
+	<!-- <div class="alert alert-danger" ng-if="sc.signupError" role="alert">{{sc.signupErrorMessage}}</div>
+	<div class="alert alert-success" ng-if="sc.signupSuccess" role="alert">Account created! <a ui-sref="login">Login</a> now!</div> --> 
+	
+	<label for="inputCode" class="sr-only">Code</label>
+	<input type="text" id="inputCode" ng-model="ac.airport.code" class="form-control" placeholder="Code" pattern=".{4,30}" required title="4 characters minimum" autofocus>
+	</br>
+	
+	<label for="inputName" class="sr-only">Name</label>
+	<input type="text" id="inputName" ng-model="ac.airport.name" class="form-control" placeholder="Name" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<label for="inputCity" class="sr-only">City</label>
+	<input type="text" id="inputCity" ng-model="ac.airport.city" class="form-control" placeholder="City" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<label for="inputState" class="sr-only">State</label>
+	<input type="text" id="inputState" ng-model="ac.airport.state" class="form-control" placeholder="State" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<label for="inputLongitude" class="sr-only">Longitude</label>
+	<input type="text" id="inputLongitude" ng-model="ac.airport.longitude" class="form-control" placeholder="Longitude" pattern=".{7,30}" title="7 characters minimum" required>
+	</br>
+	
+	<label for="inputLatitude" class="sr-only">Latitude</label>
+	<input type="text" id="inputLatitude" ng-model="ac.airport.latitude" class="form-control" placeholder="Latitude" pattern=".{7,30}" title="7 characters minimum" required>
+	</br>
+	
+	<label for="inputElevation" class="sr-only">Elevation</label>
+	<input type="text" id="inputElevation" ng-model="ac.airport.elevation" class="form-control" placeholder="Elevation" pattern=".{7,30}" title="7 characters minimum" required>
+	</br>
+	
+	<label for="inputURL" class="sr-only">URL</label>
+	<input type="tekst" id="inputURL" ng-model="ac.airport.url" class="form-control" placeholder="URL" pattern=".{7,30}" title="7 characters minimum" required>
+	</br>
+	
+	<button class="btn btn-lg btn-primary" type="submit" ng-click="ac.saveAirport()">Save Airport</button>
+</form>

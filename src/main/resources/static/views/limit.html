@@ -1,0 +1,31 @@
+<h1>LIMIT</h1>
+
+	<label for="inputCode" class="sr-only">Code</label>
+	<input type="text" id="inputCode" ng-model="lc.limit.code" class="form-control" placeholder="Code" pattern=".{4,30}" required title="4 characters minimum" autofocus>
+	</br>
+	
+	<label for="inputWindDirection" class="sr-only">Wnd Direction</label>
+	<input type="text" id="inputWindDirection" ng-model="lc.limit.windDirection" class="form-control" placeholder="Wind Direction" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<label for="inputWindSpeed" class="sr-only">Wind Speed</label>
+	<input type="text" id="inputWindSpeed" ng-model="lc.limit.windSpeed" class="form-control" placeholder=".Wind Speed" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<label for="inputClouds" class="sr-only">Clouds</label>
+	<input type="text" id="inputClouds" ng-model="lc.limit.clouds" class="form-control" placeholder="Clouds" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<label for="inputVisibility" class="sr-only">Visibility</label>
+	<input type="text" id="inputVisibility" ng-model="lc.limit.visibility" class="form-control" placeholder="Visibility" pattern=".{7,30}" title="7 characters minimum" required>
+	</br>
+	
+	<label for="inputTemperature" class="sr-only">Temperature</label>
+	<input type="text" id="inputTemperature" ng-model="lc.limit.temperature" class="form-control" placeholder="Temperature" pattern=".{7,30}" title="7 characters minimum" required>
+	</br>
+	
+	<label for="inputWeather" class="sr-only">Weather</label>
+	<input type="text" id="inputWeather" ng-model="lc.limit.weather" class="form-control" placeholder="Weather" pattern=".{4,30}" title="4 characters minimum" required>
+	</br>
+	
+	<button class="btn btn-lg btn-primary" type="submit" ng-click="ac.saveAirport()">Save Airport</button>

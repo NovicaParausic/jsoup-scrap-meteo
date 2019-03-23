@@ -1,0 +1,17 @@
+<h1>Reports</h1>
+
+<table class="table">
+	<tr>
+		<th>Code</th>
+		<th>Name</th>
+		<th>METAR</th>
+	</tr>
+	<tr ng-repeat="metar in metars">
+		<td>{{metar.airport.icao}}</td>
+		<td>{{metar.airport.city}}</td>
+		<td>{{metar.time}}</td>
+		<td>{{metar.message}}</td>
+		<td><button ng-click="rc.translateMetar(metar.airport.icao)">Translate</button>
+	</tr>
+</table>
+

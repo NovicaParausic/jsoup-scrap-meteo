@@ -1,0 +1,26 @@
+<h1>Airports</h1>
+
+<button class="btn btn-primary" ng-disabled="uc.ifPrevPageAvailable()" ng-click="uc.changePage(-1)">prev</button>
+<button class="btn btn-primary" ng-disabled="uc.ifNextPageAvailable()" ng-click="uc.changePage(1)">next</button>
+
+<table class="table">
+	<tr>
+		<th>Code</th>
+		<th>Name</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Longitude</th>
+		<th>Latitude</th>
+		<th>Elevation</th>
+	</tr>
+	<tr ng-repeat="port in airports">
+		<td>{{port.code}}</td>
+		<td>{{port.name}}</td>
+		<td>{{port.city}}</td>
+		<td>{{port.state}}</td>
+		<td>{{port.longitude}}</td>
+		<td>{{port.latitude}}</td>
+		<td>{{port.elevation}}</td>
+		<td><button ng-click="arc.addToActiveList(port.code)">Add to Active</button>
+	</tr>
+</table>
