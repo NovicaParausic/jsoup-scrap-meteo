@@ -70,7 +70,7 @@ public class ActiveServiceImpl implements ActiveService {
 
 	@Override
 	public Element fetchMetarFromUrl(String url) {
-		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/allmetsatcom.jks");
+		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/Scrap/jsoup-scrap-meteo/allmetsatcom.jks");
 		
 		Document document = null; 
 		 
@@ -88,10 +88,10 @@ public class ActiveServiceImpl implements ActiveService {
 		
 		return ret;
 	}
-
+	
 	@Override
 	public Element fetchMetarAmsterdam() {
-		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/allmetsatcom.jks");
+		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/Scrap/jsoup-scrap-meteo/allmetsatcom.jks");
 		
 		Document document = null; 
 		 

@@ -30,7 +30,8 @@
 		
 		function parseWind(wind){
 			var ret = [];
-			var degreeSpeed = wind.directionDegrees + ' at ' + wind.speed + ' KT'; 
+			var windDirection = parseWindDirection(wind);
+			var degreeSpeed = windDirection + ' at ' + wind.speed + ' KT'; 
 			console.log(degreeSpeed);
 			ret.push(degreeSpeed);
 			
@@ -46,6 +47,13 @@
 			}
 			
 			return ret;
+		}
+		
+		function parseWindDirection(wind){
+			if (!wind.directionDegrees) {
+				return wind.direction; 
+			}
+			return wind.directionDegrees;
 		}
 		
 		function parseWeather(weathers){
