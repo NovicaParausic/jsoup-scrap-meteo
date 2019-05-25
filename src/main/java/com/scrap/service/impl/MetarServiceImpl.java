@@ -17,8 +17,8 @@ public class MetarServiceImpl implements MetarService {
 	@Override
 	public List<String> fetch(String url) {
 		//https://stackoverflow.com/questions/7744075/how-to-connect-via-https-using-jsoup
-		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/Scrap/jsoup-scrap-meteo/allmetsatcom.jks");
-
+		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/allmetsatcom.jks");
+		
 		List<String> ret = new ArrayList<>();
 		
 		Document document = null; 
@@ -42,7 +42,7 @@ public class MetarServiceImpl implements MetarService {
 
 	@Override
 	public  Element fetchInfo() {
-		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/Scrap/jsoup-scrap-meteo/allmetsatcom.jkss");
+		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/allmetsatcom.jks");
 		
 		Document document = null; 
 		 
@@ -63,7 +63,7 @@ public class MetarServiceImpl implements MetarService {
 
 	@Override
 	public List<String> fetchMetarBg() {
-		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/Scrap/jsoup-scrap-meteo/allmetsatcom.jks");
+		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/allmetsatcom.jks");
 		
 		List<String> ret = new ArrayList<>();
 		
@@ -88,7 +88,7 @@ public class MetarServiceImpl implements MetarService {
 
 	@Override
 	public List<String> fetchTafBg() {
-		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/Scrap/jsoup-scrap-meteo/allmetsatcom.jks");
+		System.setProperty("javax.net.ssl.trustStore", "C:/UOOP/allmetsatcom.jks");
 		
 		List<String> ret = new ArrayList<>();
 		

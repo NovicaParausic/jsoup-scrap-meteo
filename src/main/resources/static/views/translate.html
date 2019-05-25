@@ -1,8 +1,5 @@
 <h1>Translate</h1>
 
-<i class="fa fa-spinner fa-spin fa-3x fa-fw margin-bottom"></i>
-<span class="sr-only">Loading...</span>
-
 <table class="table table-borderless">
 	<tr>
 		<td>Raw METAR</td>
@@ -76,7 +73,8 @@
 		<td>
 			<table>
 				<tr ng-repeat="cloud in metar.clouds">
-					<td>{{cloud.height}} {{cloud.quantity}} {{cloud.type}}</td>
+					<td>{{cloud.height}}</td>
+					<td>{{cloud.quantity}}</td>
 				</tr>
 			</table>
 		</td>
@@ -98,12 +96,3 @@
 		<td>{{humidity}} %</td>
 	</tr>
 </table>
-
-<p>CAVOK: "Clouds and Visibility OK", a weather status report for pilots 
-	when visibility is at least 10 kilometres, there are no clouds 
-	below 5000 feet or minimum sector altitude (whichever is higher), 
-	and there is no current or forecast significant weather such as precipitation.
-</p>
-<p>NOSIG: means that no significant change is expected to the reported conditions 
-	within the next 2 hours.
-</p>
