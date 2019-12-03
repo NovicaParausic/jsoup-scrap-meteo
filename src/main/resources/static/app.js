@@ -2,10 +2,10 @@ var myApp = angular.module('scrap', ['ui.router', 'ngStorage']);
 
 myApp.config(function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/home');
+    $urlRouterProvider.otherwise('/airports');
 
     $stateProvider
-
+    	/*
         .state('home', {
             url: '/home',
             templateUrl: 'views/partial-home.html'
@@ -16,7 +16,7 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         	templateUrl: 'views/airport.html',
         	controller: 'AirportController as ac'
         })
-        
+        */
         .state('airports', {
         	url: '/airports',
         	templateUrl: 'views/airports.html',
@@ -27,12 +27,6 @@ myApp.config(function($stateProvider, $urlRouterProvider) {
         	url: '/active',
         	templateUrl: 'views/active.html',
         	controller: 'ActiveController as acc'
-        })
-             
-        .state('limit', {
-        	url: '/limit',
-        	templateUrl: 'views/limit.html',
-        	controller: 'LimitController as lc'
         })
         
         .state('translate', {

@@ -2,8 +2,8 @@
 	'use strict';
 	
 	myApp.controller('TranslateController', [
-						'$scope', '$http', '$stateParams', 'dataStoreService', 'weatherService',
-						function($scope, $http, $stateParams, dataStoreService, weatherService) {
+						'$scope', '$http', '$stateParams', '$timeout', 'dataStoreService', 'weatherService',
+						function($scope, $http, $stateParams, $timeout, dataStoreService, weatherService) {
 		console.log('hola translate controller');
 		
 		var vm = this;
@@ -16,22 +16,22 @@
 		$scope.winds = [];
 		$scope.weathers = [];
 		
+		var timeout = '';
+		
 		function getTranslate(code){
 			$http({
 				method: 'POST',
 				url: '/api/active/metarFromCode/' + code
 			})
 			.then( function(response) {
-				console.log(response.status);
 				console.log(response.data);
 				$scope.metar = response.data;
 				
-				//calcHumidity();
 				$scope.humidity = weatherService.calculateHumidity($scope.metar.temperature, $scope.metar.dewPoint);
-				
 				$scope.winds = weatherService.parseWind($scope.metar.wind);
-				
 				$scope.weathers = weatherService.parseWeather($scope.metar.weatherConditions);
+				
+				repeatGet();
 			})
 			.catch( function(response) {
 				console.log(response.status);
@@ -39,24 +39,14 @@
 		}
 		
 		getTranslate(code);
-		
-		function calcHumidity(){
-			$scope.humidity = weatherService.calculateHumidity($scope.metar.temperature, $scope.metar.dewPoint);
+					
+		function repeatGet() {
+			console.log(new Date());
+			timeout = $timeout(getTranslate, 60000);
 		}
 				
-		function refreshMetar(){
-			var d = new Date();
-			var h = d.getMinutes() % 5;
-			
-			setTimeout(repeatDate, (5 - h) * 60 * 1000);
-		} 
-			
-		refreshMetar();
-		
-		function repeatDate() {
-			console.log(new Date());
-			getTranslate(code);
-			setTimeout(repeatDate,  5 * 60 * 1000);
-		}
+		$scope.$on('$destroy', function() {
+		    $timeout.cancel(timeout);
+		});
 	}]);
 })();

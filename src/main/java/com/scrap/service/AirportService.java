@@ -1,19 +1,12 @@
 package com.scrap.service;
 
-import org.springframework.data.domain.Page;
+import java.util.List;
 
-import com.scrap.dto.AirportDto;
 import com.scrap.entity.Airport;
 
 public interface AirportService {
 
-	Page<Airport> getAirports(int page);
+	List<Airport> getAirports();
 	
 	Airport getAirport(String code);
-	
-	String getUrlFromCode(String code);
-	
-	Airport save(AirportDto airport);
-	
-	void delete(String code);
 }

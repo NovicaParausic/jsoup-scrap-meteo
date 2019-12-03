@@ -26,9 +26,23 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			
+			<exclusions>
+        		<!-- Exclude the Tomcat dependency -->
+        		<exclusion>
+            		<groupId>org.springframework.boot</groupId>
+            		<artifactId>spring-boot-starter-tomcat</artifactId>
+        		</exclusion>
+    		</exclusions>
 		</dependency>
 
-		 <dependency>
+		<!-- Use Jetty instead -->
+		<dependency>
+    		<groupId>org.springframework.boot</groupId>
+    		<artifactId>spring-boot-starter-jetty</artifactId>
+		</dependency>
+		
+		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<scope>runtime</scope>
@@ -44,11 +58,11 @@
 			<groupId>org.springframework</groupId>
   			<artifactId>spring-context-support</artifactId>
 		</dependency>
-	<!--	<dependency>
+		<dependency>
   			<groupId>org.quartz-scheduler</groupId>
   			<artifactId>quartz</artifactId>
   			<version>2.3.0</version>
-		</dependency>-->
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

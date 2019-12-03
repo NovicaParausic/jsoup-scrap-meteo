@@ -1,8 +1,5 @@
 <h1>Active Airports</h1>
 
-<button class="btn btn-primary" ng-disabled="uc.ifPrevPageAvailable()" ng-click="uc.changePage(-1)">prev</button>
-<button class="btn btn-primary" ng-disabled="uc.ifNextPageAvailable()" ng-click="uc.changePage(1)">next</button>
-
 <table class="table">
 	<tr>
 		<th>Code</th>
@@ -21,7 +18,7 @@
 		<td>{{port.longitude}}</td>
 		<td>{{port.latitude}}</td>
 		<td>{{port.elevation}}</td>
+		<td><button ng-click="acc.deleteFromActive(port.code)">Delete</button></td>
 	</tr>
 </table>
 
-<button ng-click="acc.start()">Start</button>

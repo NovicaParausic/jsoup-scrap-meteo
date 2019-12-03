@@ -2,8 +2,8 @@
 	'use strict';
 	
 	myApp.controller('ReportsController', [ 
-					'$scope', '$http', '$state', 'dataStoreService',
-					function($scope, $http, $state, dataStoreService) {
+					'$scope', '$http', '$state', '$timeout', 'dataStoreService',
+						function($scope, $http, $state, $timeout, dataStoreService) {
 		
 		console.log('reports controller');
 		
@@ -12,9 +12,10 @@
 		vm.translateMetar = translateMetar;
 		
 		$scope.metars = '';
+		var timeout = '';
 		
 		function getMetars(){
-			console.log(new Date());
+			//console.log(new Date());
 			$http({
 				method: 'GET',
 				url: '/api/active/metarsFromCart'
@@ -22,6 +23,9 @@
 			.then( function(response) {
 				if(response && response.data) {
 					$scope.metars = response.data;
+					console.log($scope.metars.length);
+					var reports = $scope.metars;  
+					repeatGet();
 				}
 			})
 			.catch( function(response) {
@@ -30,22 +34,19 @@
 		}
 		
 		getMetars();
-		
-		var d = new Date();
-		var h = d.getMinutes() % 5;
-		
-		
-		function repeatDate() {
+				
+		function repeatGet() {
 			console.log(new Date());
-			getMetars();
-			setTimeout(repeatDate,  5 * 60 * 1000);
+			timeout = $timeout(getMetars, 60000);
 		}
-		
-		setTimeout(repeatDate, (5 - h) * 60 * 1000);
 		
 		function translateMetar(code){
 			dataStoreService.saveCode(code);
 			$state.go('translate');
 		}
+		
+		$scope.$on('$destroy', function() {
+		    $timeout.cancel(timeout);
+		});
 	}]);
 })();

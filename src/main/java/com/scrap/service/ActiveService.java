@@ -2,8 +2,6 @@ package com.scrap.service;
 
 import java.util.List;
 
-import org.jsoup.nodes.Element;
-
 import com.scrap.entity.Airport;
 
 import io.github.mivek.model.Metar;
@@ -12,17 +10,12 @@ public interface ActiveService {
 
 	List<Airport> getActiveAirports();
 	
-	List<Metar> fetchMetars();
+	String saveToActive(Airport airport);
 	
-	Element fetchMetarFromUrl(String url);
+	List<Metar> fetchMetarsFromCart();
 	
-	Element fetchMetarAmsterdam();
-	
-	Airport saveToActive(Airport airport);
+	Metar getMetar(String code);
 	
 	void removeFromActive(String code);
 	
-	boolean isActive(String code);
-	
-	void clear();
 }

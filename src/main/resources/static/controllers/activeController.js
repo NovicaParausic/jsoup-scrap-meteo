@@ -2,9 +2,10 @@
 	'use strict';
 	
 	myApp.controller('ActiveController', ['$scope', '$http', function($scope, $http) {
-		console.log('HOLA aCTIVE cONTROLLER');
-		
+			
 		var vm = this;
+		
+		vm.deleteFromActive = deleteFromActive; 
 		
 		$scope.activeAirports = '';
 		
@@ -25,5 +26,19 @@
 		}
 		
 		getActiveAirports();
+		
+		function deleteFromActive(code) {
+			$http ({
+				method: 'DELETE',
+				url: '/api/active/' + code
+			})
+			.then (function (response) {
+				console.log(response.status);
+				getActiveAirports();
+			})
+			.catch (function (response) {
+				console.log(response);
+			});
+		}
 	}]);
 })();

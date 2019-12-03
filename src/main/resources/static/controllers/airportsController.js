@@ -7,9 +7,7 @@
 		var vm = this;
 		
 		vm.addToActiveList = addToActiveList;
-		vm.ifNextPageAvailable = ifNextPageAvailable;
-		vm.ifPrevPageAvailable = ifPrevPageAvailable;
-		
+				
 		
 		$scope.airports = '';
 		
@@ -20,7 +18,7 @@
 			})
 			.then(function (response) {
 				console.log(response.data);
-				$scope.airports = response.data.content;
+				$scope.airports = response.data;
 			})
 			.catch(function (response) {
 				console.log(response.status);
@@ -44,12 +42,5 @@
 			});
 		}
 		
-		function ifNextPageAvailable(){
-			
-		}
-		
-		function ifPrevPageAvailable(){
-			
-		}
 	}]);
 })();
