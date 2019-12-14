@@ -9,18 +9,28 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 @SpringBootApplication
-//@EnableAsync
+@EnableAsync
 public class MetarTafNotamApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MetarTafNotamApplication.class, args);
 	}
 
-	@Bean
-	public Executor taskExecutor() {
-		
+	@Bean(name = "outer")
+	public Executor ouuterTaskExecutor() {
 		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-		executor.setThreadNamePrefix("AsyncScrapThread");
+		executor.setThreadNamePrefix("OST-");
+		executor.setCorePoolSize(10);
+		executor.initialize();
+		return executor;
+	}
+	
+	@Bean(name = "inner")
+	public Executor innerTaskExecutor() {
+		ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
+		executor.setThreadNamePrefix("IST-");
+		executor.setCorePoolSize(10);
+		executor.initialize();
 		return executor;
 	}
 }

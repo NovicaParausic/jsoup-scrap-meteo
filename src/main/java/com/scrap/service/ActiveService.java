@@ -10,7 +10,7 @@ public interface ActiveService {
 
 	List<Airport> getActiveAirports();
 	
-	String saveToActive(Airport airport);
+	void saveToActive(String sessionId, Airport airport);
 	
 	List<Metar> fetchMetarsFromCart();
 	

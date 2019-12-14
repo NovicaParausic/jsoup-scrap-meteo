@@ -6,19 +6,22 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PreDestroy;
+import javax.transaction.Transactional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.scrap.component.ActiveComponent;
 import com.scrap.entity.Airport;
 import com.scrap.entity.MetarEntity;
+import com.scrap.entity.UserIcao;
 import com.scrap.repository.MetarEntityRepository;
-import com.scrap.service.ActiveService;
+import com.scrap.repository.UserIcaoRepository;
 import com.scrap.util.MetarUtil;
 
 import io.github.mivek.model.Metar;
@@ -33,20 +36,26 @@ public class ActiveServiceImpl implements ActiveService {
 	private MetarEntityRepository meRepo;
 	
 	@Autowired
+	private UserIcaoRepository uiRepo;
+	
+	@Autowired
 	private ActiveComponent activeComponent;
 	
 	private Map<String, Airport> cart = new HashMap<>();
 	
+	private String sessionId;
+	
+	@Async("outer")
+	@Transactional
 	@Override
-	public String saveToActive(Airport airport) {
+	public void saveToActive(String sessionId, Airport airport) {
+		
+		this.sessionId = sessionId;
+		log.info(sessionId);
 		
 		String code = airport.getCode();
-		
 		cart.put(code, airport);
-		
 		activeComponent.save(airport);
-		
-		return null;
 	}
 
 	@Override
@@ -54,9 +63,8 @@ public class ActiveServiceImpl implements ActiveService {
 
 		List<Airport> ret = new ArrayList<>(cart.values());
 		log.info("ASI get active airports");
-		for(Airport port : ret) {
-			log.info(port.getCode());
-		}
+		cart.forEach((k, v) -> log.info(k));
+		
 		
 		return ret;
 	}
@@ -64,15 +72,15 @@ public class ActiveServiceImpl implements ActiveService {
 	@Override
 	public List<Metar> fetchMetarsFromCart() {
 		
-		List<Airport> activeAirport = getActiveAirports();
 		List<Metar> ret = new ArrayList<>();
 		
-		for (Airport airport : activeAirport) {
-			MetarEntity me = meRepo.findById(airport.getCode()).orElse(null);
+		cart.forEach((k, v) -> {
+			MetarEntity me = meRepo.findById(v.getCode()).orElse(null);
 			log.info(me.getCode());
 			Metar metar = MetarUtil.decodeMetarFromString(me.getMetar());
 			ret.add(metar);
-		}
+		
+		});
 		return ret;
 	}
 	
@@ -90,8 +98,17 @@ public class ActiveServiceImpl implements ActiveService {
 	}
 	
 	@PreDestroy
+	@Transactional
 	private void clearCart() {
-		cart.clear();
-		activeComponent.clearScheduler();
+		cart.forEach((code, airport) -> {
+			List<UserIcao> list = uiRepo.findByIcao(code);
+			log.info("ui list size: " + list.size());
+			
+			if (list.size() < 2) {
+				activeComponent.deleteJob(code);
+			}
+			activeComponent.deleteByUserAndIcao(sessionId, code);
+		});
+		
 	}
 }

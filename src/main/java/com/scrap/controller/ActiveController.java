@@ -43,23 +43,20 @@ public class ActiveController {
 		log.info("SessionId: " + session.getId());
 		
 		List<Airport> ret = activeService.getActiveAirports();
-		if(ret == null) {
-			return ResponseEntity.ok().build();
-		} else {
-			return ResponseEntity.ok(ret);
-		}
+		return ResponseEntity.ok(ret);		
 	}
 	
 	@PostMapping
 	public ResponseEntity<Airport> addToCart(HttpServletRequest request, @RequestBody String code) {
 		
 		Airport airport = airportService.getAirport(code);
-		
+		String sessionId = request.getSession().getId();
+				
 		if(airport == null) {
-			System.out.println("ActiveController add to Cart airport NULLL");
+			log.warn("ActiveController add to Cart airport NULLL");
 			return ResponseEntity.badRequest().build();
 		} else {
-			activeService.saveToActive(airport);
+			activeService.saveToActive(sessionId, airport);
 			log.info("Active Controller add to cart: " + code);
 			return ResponseEntity.ok(airport);
 		}
@@ -87,6 +84,11 @@ public class ActiveController {
 			Metar metar = activeService.getMetar(code);
 			return ResponseEntity.ok(metar);
 		}
+	}
+	
+	@DeleteMapping
+	public void clearCart(HttpSession session) {
+		session.invalidate();
 	}
 	
 	@DeleteMapping(value = "/{code}")
