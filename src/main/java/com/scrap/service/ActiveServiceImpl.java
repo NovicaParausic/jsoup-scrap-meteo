@@ -54,6 +54,7 @@ public class ActiveServiceImpl implements ActiveService {
 		log.info(sessionId);
 		
 		String code = airport.getCode();
+		uiRepo.save(new UserIcao(sessionId, code));
 		cart.put(code, airport);
 		activeComponent.save(airport);
 	}
