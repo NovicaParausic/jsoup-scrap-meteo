@@ -19,4 +19,4 @@ At the first page user can choose which airport he wants
 to monitor. After saving to active list application is going to make initial 
 METAR request from mentioned site. From that request application fetch time when 
 last METAR was made and it counts next execution time. Based on that it schedules 
-quartz job which is going to be responsible for most efficient data loading. 
+quartz job.
