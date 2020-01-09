@@ -21,12 +21,14 @@ import io.github.mivek.model.Metar;
 public class JobTriggerUtil {
 
 	public static ZonedDateTime createExecutionTime(Metar metar) {
-		
+		/*On some airports METAR-s are issued starting at 00:00 and with half an hour interval,
+		* and on some with 5 minutes delay and with one hour interval.
+		*/
 		LocalTime lastRequestUtcTime = metar.getTime().plusMinutes(1);
 		LocalTime utcTimeNow = ZonedDateTimeProvider.now().toLocalTime();
 		
 		while (lastRequestUtcTime.isBefore(utcTimeNow)) {
-			lastRequestUtcTime = lastRequestUtcTime.plusMinutes(10);
+			lastRequestUtcTime = lastRequestUtcTime.plusMinutes(5);
 		}
 		
 		LocalDateTime executionLDTime = lastRequestUtcTime.atDate(ZonedDateTimeProvider.now().toLocalDate());
