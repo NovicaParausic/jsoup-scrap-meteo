@@ -10,7 +10,7 @@ Application uses:
   [allmetsat.com](https://www.allmetsat.com/)
 - Quartz library for most efficient data loading 
 - [Mivek library](https://github.com/mivek/MetarParser) for translating raw reports 
-- Server side uses two TaskPoolExecutor-s, "outer" and "inner". "Outer" is for 
+- Server side uses two ThreadPoolExecutor-s, "outer" and "inner". "Outer" is for 
   receiving client side requests and "inner" for executing asycn scrape requests 
 - Client side uses one minute poling in order for reports to be
   UpToDate
